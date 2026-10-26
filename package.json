@@ -3,12 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "studio": "NODE_OPTIONS=--max-old-space-size=4096 remotion studio src/index.ts",
-    "audio": "NODE_OPTIONS=--max-old-space-size=4096 node audio/synth.mjs && for f in audio/episodes/*.mjs; do node \"$f\"; done",
-    "cues": "NODE_OPTIONS=--max-old-space-size=4096 node scripts/srt2json.mjs",
-    "export": "NODE_OPTIONS=--max-old-space-size=4096 bash scripts/export.sh",
-    "typecheck": "NODE_OPTIONS=--max-old-space-size=4096 tsc -p . --noUnusedLocals",
-    "test": "NODE_OPTIONS=--max-old-space-size=4096 vitest run"
+    "studio": "node scripts/remotion-cli.mjs studio src/index.ts",
+    "audio": "node scripts/audio-all.mjs",
+    "cues": "node scripts/srt2json.mjs",
+    "export": "node scripts/export-portable.mjs",
+    "typecheck": "node --max-old-space-size=4096 ./node_modules/typescript/bin/tsc -p . --noUnusedLocals",
+    "test": "node --max-old-space-size=4096 ./node_modules/vitest/vitest.mjs run",
+    "doctor": "node scripts/doctor.mjs",
+    "ep-dir": "node scripts/ep-dir.mjs",
+    "qa": "node scripts/qa-media.mjs",
+    "check:portable": "node scripts/portable-selftest.mjs"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.529",
